@@ -13,6 +13,7 @@ interface MainContract {
 
     interface Business {
         fun onResume()
+        fun onPlayerClicked(id: String)
 
         interface DataManager {
             fun fetchPlayers(callback: DatabaseCallback<List<Player>>)

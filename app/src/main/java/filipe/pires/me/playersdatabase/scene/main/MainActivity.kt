@@ -1,10 +1,18 @@
 package filipe.pires.me.playersdatabase.scene.main
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.entity.Player
 import filipe.pires.me.playersdatabase.io.DatabaseWorker
+import filipe.pires.me.playersdatabase.scene.main.recycler.DefaultItemDecorator
+import filipe.pires.me.playersdatabase.scene.main.recycler.PlayersAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -19,13 +27,29 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onResume() {
         super.onResume()
         interactor.onResume()
+        player_list.layoutManager = LinearLayoutManager(applicationContext)
+        player_list.addItemDecoration(DefaultItemDecorator(
+                resources.getDimensionPixelSize(R.dimen.default_padding),
+                ContextCompat.getDrawable(applicationContext, R.drawable.divider)
+        ))
     }
 
     override fun displayEmptyListMessage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        player_list.visibility = GONE
+        empty_list_message.visibility = VISIBLE
     }
 
     override fun displayPlayers(players: List<Player>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        player_list.visibility = VISIBLE
+        empty_list_message.visibility = GONE
+
+        val onItemClickListeners = ArrayList<View.OnClickListener>()
+        players.forEach { player ->
+            onItemClickListeners.add(
+                    View.OnClickListener {
+                        interactor.onPlayerClicked(player.id)
+                    })
+        }
+        player_list.adapter = PlayersAdapter(players.map { it.name }, onItemClickListeners)
     }
 }

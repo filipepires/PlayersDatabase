@@ -7,6 +7,9 @@ class MainInteractor(
         private val presenter: MainContract.Presentation,
         private val playerWorker: MainContract.Business.DataManager
 ) : MainContract.Business {
+    override fun onPlayerClicked(id: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onResume() {
         val callback = object : DatabaseCallback<List<Player>> {
