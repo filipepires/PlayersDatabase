@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
-class Player : Serializable {
+internal class DataTransferPlayer : Serializable {
 
     @SerializedName("id")
     @Expose
