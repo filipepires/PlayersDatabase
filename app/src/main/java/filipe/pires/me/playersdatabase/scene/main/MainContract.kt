@@ -6,6 +6,8 @@ import filipe.pires.me.playersdatabase.io.DatabaseCallback
 interface MainContract {
 
     interface View {
+        fun displayEmptyListMessage()
+        fun displayPlayers(players: List<Player>)
 
     }
 
@@ -18,7 +20,7 @@ interface MainContract {
     }
 
     interface Presentation {
-        fun presentPlayers(response: List<Player>)
+        fun presentPlayers(players: List<Player>)
 
     }
 
