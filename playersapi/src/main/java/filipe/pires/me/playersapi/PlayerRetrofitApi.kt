@@ -10,15 +10,15 @@ internal interface PlayerRetrofitApi {
     fun getPlayers(): Call<List<DataTransferPlayer>>
 
     @GET("player/{id}")
-    fun getPlayer(@Path("id") id: String): Call<DataTransferPlayer>
+    fun getPlayer(@Path("id") id: String): Call<List<DataTransferPlayer>>
 
     @PUT("player/{id}")
-    fun updatePlayer(@Path("id") id: String, @Body player: DataTransferPlayer): Call<DataTransferPlayer>
+    fun updatePlayer(@Path("id") id: String, @Body player: DataTransferPlayer): Call<List<DataTransferPlayer>>
 
     @POST("player")
-    fun addPlayer(@Body player: DataTransferPlayer): Call<DataTransferPlayer>
+    fun addPlayer(@Body player: DataTransferPlayer): Call<List<DataTransferPlayer>>
 
     @DELETE("player/{id}")
-    fun deletePlayer(@Path("id") id: String): Call<DataTransferPlayer>
+    fun deletePlayer(@Path("id") id: String): Call<List<DataTransferPlayer>>
 
 }

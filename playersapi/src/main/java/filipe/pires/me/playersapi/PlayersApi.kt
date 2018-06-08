@@ -46,13 +46,13 @@ class PlayersApi {
 
     fun getPlayer(id: String, callback: PlayersCallback<DatabasePlayer>) {
         val call = playersService.getPlayer(id)
-        call.enqueue(object : Callback<DataTransferPlayer> {
-            override fun onFailure(call: Call<DataTransferPlayer>, t: Throwable?) {
+        call.enqueue(object : Callback<List<DataTransferPlayer>> {
+            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<DataTransferPlayer>, response: Response<DataTransferPlayer>) {
-                extractPlayer(response.body(), callback)
+            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
+                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
             }
 
         })
@@ -73,13 +73,13 @@ class PlayersApi {
 
     fun updatePlayer(id: String, player: DatabasePlayer, callback: PlayersCallback<DatabasePlayer>) {
         val call = playersService.updatePlayer(id, toDataTransferObject(player))
-        call.enqueue(object : Callback<DataTransferPlayer> {
-            override fun onFailure(call: Call<DataTransferPlayer>, t: Throwable?) {
+        call.enqueue(object : Callback<List<DataTransferPlayer>> {
+            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<DataTransferPlayer>, response: Response<DataTransferPlayer>) {
-                extractPlayer(response.body(), callback)
+            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
+                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
             }
 
         })
@@ -95,13 +95,13 @@ class PlayersApi {
 
     fun addPlayer(player: DatabasePlayer, callback: PlayersCallback<DatabasePlayer>) {
         val call = playersService.addPlayer(toDataTransferObject(player))
-        call.enqueue(object : Callback<DataTransferPlayer> {
-            override fun onFailure(call: Call<DataTransferPlayer>, t: Throwable?) {
+        call.enqueue(object : Callback<List<DataTransferPlayer>> {
+            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<DataTransferPlayer>, response: Response<DataTransferPlayer>) {
-                extractPlayer(response.body(), callback)
+            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
+                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
             }
 
         })
@@ -109,13 +109,13 @@ class PlayersApi {
 
     fun deletePlayer(id: String, callback: PlayersCallback<DatabasePlayer>) {
         val call = playersService.deletePlayer(id)
-        call.enqueue(object : Callback<DataTransferPlayer> {
-            override fun onFailure(call: Call<DataTransferPlayer>, t: Throwable?) {
+        call.enqueue(object : Callback<List<DataTransferPlayer>> {
+            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<DataTransferPlayer>, response: Response<DataTransferPlayer>) {
-                extractPlayer(response.body(), callback)
+            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
+                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
             }
 
         })
