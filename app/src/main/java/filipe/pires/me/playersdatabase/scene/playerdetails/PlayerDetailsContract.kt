@@ -1,5 +1,8 @@
 package filipe.pires.me.playersdatabase.scene.playerdetails
 
+import filipe.pires.me.playersdatabase.entity.PlayerDetails
+import filipe.pires.me.playersdatabase.io.DatabaseCallback
+
 interface PlayerDetailsContract {
     interface View {
 
@@ -9,7 +12,7 @@ interface PlayerDetailsContract {
         fun onCreate(playerId: String)
 
         interface DataManager {
-            fun fetchPlayerWithId(playerId: String)
+            fun fetchPlayerWithId(playerId: String, callback: DatabaseCallback<PlayerDetails>)
         }
     }
 
