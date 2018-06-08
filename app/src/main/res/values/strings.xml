@@ -2,4 +2,6 @@
     <string name="app_name">PlayersDatabase</string>
     <string name="no_players_found">No players found</string>
     <string name="default_description">N/A</string>
+    <string name="name">Name</string>
+    <string name="about_this_player">About this Player:</string>
 </resources>

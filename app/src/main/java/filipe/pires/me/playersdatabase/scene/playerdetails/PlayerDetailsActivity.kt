@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.io.PlayerDetailsWorker
 import filipe.pires.me.playersdatabase.utils.DefaultStringProvider
+import kotlinx.android.synthetic.main.activity_player_details.*
 
 
 class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
@@ -27,10 +28,10 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
     }
 
     override fun displayName(name: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.name.text = name
     }
 
     override fun displayDescription(description: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.description.text = description
     }
 }
