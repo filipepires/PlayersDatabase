@@ -5,6 +5,8 @@ import filipe.pires.me.playersdatabase.io.DatabaseCallback
 
 interface PlayerDetailsContract {
     interface View {
+        fun displayName(name: String)
+        fun displayDescription(description: String)
 
     }
 

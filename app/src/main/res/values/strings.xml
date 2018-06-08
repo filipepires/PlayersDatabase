@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PlayersDatabase</string>
     <string name="no_players_found">No players found</string>
+    <string name="default_description">N/A</string>
 </resources>
