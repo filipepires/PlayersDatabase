@@ -13,11 +13,11 @@ class MainInteractorTest {
 
     private val presenter = mock<MainContract.Presentation>()
     private val playerWorker = mock<MainContract.Business.DataManager>()
-    private val interactor = MainInteractor(presenter, playerWorker)
+    private val router = mock<MainContract.Routes>()
+    private val interactor = MainInteractor(presenter, playerWorker, router)
 
     @Test
-    fun `when resuming the view, fetch players`(){
-        val callback = mock<DatabaseCallback<List<Player>>>()
+    fun `when resuming the view, fetch players`() {
         val player = Player("some id", "some name")
         val response = Arrays.asList(player)
         whenever(playerWorker.fetchPlayers(any())).thenAnswer {
@@ -26,5 +26,11 @@ class MainInteractorTest {
         }
         interactor.onResume()
         verify(presenter).presentPlayers(response)
+    }
+
+    @Test
+    fun `when a player is selected, route to player details with id`() {
+        interactor.onPlayerClicked("some id")
+        verify(router).routeToPlayerDetailsWith("some id")
     }
 }

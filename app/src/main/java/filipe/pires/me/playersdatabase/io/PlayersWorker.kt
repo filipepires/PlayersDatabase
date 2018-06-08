@@ -6,8 +6,7 @@ import filipe.pires.me.playersapi.PlayersCallback
 import filipe.pires.me.playersdatabase.entity.Player
 import filipe.pires.me.playersdatabase.scene.main.MainContract
 
-class DatabaseWorker(private val api: PlayersApi = PlayersApi()) : MainContract.Business.DataManager {
-
+class PlayersWorker(private val api: PlayersApi = PlayersApi()) : MainContract.Business.DataManager {
 
     override fun fetchPlayers(callback: DatabaseCallback<List<Player>>) {
         val apiCallback = object : PlayersCallback<List<DatabasePlayer>> {

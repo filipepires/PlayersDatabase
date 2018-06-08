@@ -11,10 +11,10 @@ import filipe.pires.me.playersdatabase.entity.Player
 import org.junit.Test
 import java.util.*
 
-class DatabaseWorkerTest {
+class PlayersWorkerTest {
 
     private val api = mock<PlayersApi>()
-    private val worker = DatabaseWorker(api)
+    private val worker = PlayersWorker(api)
 
     @Test
     fun `when receives a list of database player, return a list of players`() {

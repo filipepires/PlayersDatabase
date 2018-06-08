@@ -9,7 +9,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.entity.Player
-import filipe.pires.me.playersdatabase.io.DatabaseWorker
+import filipe.pires.me.playersdatabase.io.PlayersWorker
 import filipe.pires.me.playersdatabase.scene.main.recycler.DefaultItemDecorator
 import filipe.pires.me.playersdatabase.scene.main.recycler.PlayersAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,7 +17,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
-    private val interactor: MainContract.Business by lazy { MainInteractor(MainPresenter(this), DatabaseWorker()) }
+    private val interactor: MainContract.Business by lazy { MainInteractor(
+            MainPresenter(this),
+            PlayersWorker(),
+            MainRouter(applicationContext)
+    ) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

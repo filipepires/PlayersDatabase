@@ -25,4 +25,7 @@ interface MainContract {
 
     }
 
+    interface Routes{
+        fun routeToPlayerDetailsWith(id: String)
+    }
 }

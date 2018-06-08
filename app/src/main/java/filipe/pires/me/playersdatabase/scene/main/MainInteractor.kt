@@ -5,11 +5,9 @@ import filipe.pires.me.playersdatabase.io.DatabaseCallback
 
 class MainInteractor(
         private val presenter: MainContract.Presentation,
-        private val playerWorker: MainContract.Business.DataManager
+        private val playerWorker: MainContract.Business.DataManager,
+        private val router : MainContract.Routes
 ) : MainContract.Business {
-    override fun onPlayerClicked(id: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     override fun onResume() {
         val callback = object : DatabaseCallback<List<Player>> {
@@ -22,5 +20,9 @@ class MainInteractor(
             }
         }
         playerWorker.fetchPlayers(callback)
+    }
+
+    override fun onPlayerClicked(id: String) {
+        router.routeToPlayerDetailsWith(id)
     }
 }
