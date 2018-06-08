@@ -17,6 +17,6 @@ interface PlayerDetailsContract {
     }
 
     interface Presentation {
-
+        fun presentPlayerDetails(playerDetails: PlayerDetails)
     }
 }

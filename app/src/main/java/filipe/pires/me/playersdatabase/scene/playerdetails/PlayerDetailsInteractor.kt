@@ -11,7 +11,7 @@ class PlayerDetailsInteractor(
     override fun onCreate(playerId: String) {
         val callback = object : DatabaseCallback<PlayerDetails> {
             override fun onSuccess(response: PlayerDetails) {
-
+                presenter.presentPlayerDetails(response)
             }
 
             override fun onFailure() {
