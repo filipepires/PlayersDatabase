@@ -37,7 +37,7 @@ function getPlayers(req, res) {
 function getPlayer(req, res) {
   const id = req.params.id;
   const player = players.find(p => p.id == id);
-  return player ? res.status(200).json(players).end() : res.status(404).end();
+  return player ? res.status(200).json(player).end() : res.status(404).end();
 }
 /* Add a new player to the list
  * Example: localhost:3000/player
