@@ -6,4 +6,5 @@
     <color name="divider_color">#E4D8DA</color>
     <color name="defaultBackground">#FFFFFF</color>
     <color name="defaultHighlight">#E4D8DA</color>
+    <color name="white">#FFFFFF</color>
 </resources>

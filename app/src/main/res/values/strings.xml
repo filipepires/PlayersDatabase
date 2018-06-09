@@ -6,4 +6,7 @@
     <string name="about_this_player">About this Player:</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="player_name">Player name</string>
+    <string name="player_description">The player description</string>
 </resources>
