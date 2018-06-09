@@ -19,6 +19,6 @@ internal interface PlayerRetrofitApi {
     fun addPlayer(@Body player: DataTransferPlayer): Call<List<DataTransferPlayer>>
 
     @DELETE("player/{id}")
-    fun deletePlayer(@Path("id") id: String): Call<List<DataTransferPlayer>>
+    fun deletePlayer(@Path("id") id: String): Call<Void>
 
 }

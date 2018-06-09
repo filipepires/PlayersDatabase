@@ -117,17 +117,16 @@ class PlayersApi {
         })
     }
 
-    fun deletePlayer(id: String, callback: PlayersCallback<DatabasePlayer>) {
+    fun deletePlayer(id: String, callback: PlayersCallback<Any>) {
         val call = playersService.deletePlayer(id)
-        call.enqueue(object : Callback<List<DataTransferPlayer>> {
-            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
+        call.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
-                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                callback.onSuccess(Any())
             }
-
         })
     }
 }
