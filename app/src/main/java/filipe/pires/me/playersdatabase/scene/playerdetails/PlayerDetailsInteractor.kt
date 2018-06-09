@@ -7,8 +7,9 @@ import filipe.pires.me.playersdatabase.io.DatabaseCallback
 
 class PlayerDetailsInteractor(
         private val presenter: PlayerDetailsContract.Presentation,
-        private val playerDetailsWorker: PlayerDetailsContract.Business.DataManager,
-        private val router: PlayerDetailsContract.Routes
+        private val playerDetailsWorker: PlayerDetailsContract.Business.GetPlayerDetails,
+        private val router: PlayerDetailsContract.Routes,
+        private val deletePlayerWorker: PlayerDetailsContract.Business.RemovePlayer
 ) : PlayerDetailsContract.Business {
 
     @VisibleForTesting
@@ -31,6 +32,20 @@ class PlayerDetailsInteractor(
     override fun onOptionsItemSelected(itemId: Int, playerId: String) {
         when (itemId) {
             R.id.menu_edit -> router.routeToEditPlayer(playerDetails)
+            R.id.menu_delete -> presenter.presentConfirmationDialog(playerId)
         }
+    }
+
+    override fun onConfirmation(playerId: String) {
+        val callback = object : DatabaseCallback<Any> {
+            override fun onSuccess(response: Any) {
+                router.routeToMain()
+            }
+
+            override fun onFailure() {
+
+            }
+        }
+        deletePlayerWorker.deletePlayer(playerId, callback)
     }
 }

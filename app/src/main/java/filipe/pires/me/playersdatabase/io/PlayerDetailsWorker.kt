@@ -6,7 +6,7 @@ import filipe.pires.me.playersapi.PlayersCallback
 import filipe.pires.me.playersdatabase.entity.PlayerDetails
 import filipe.pires.me.playersdatabase.scene.playerdetails.PlayerDetailsContract
 
-class PlayerDetailsWorker(private val api: PlayersApi = PlayersApi()) : PlayerDetailsContract.Business.DataManager {
+class PlayerDetailsWorker(private val api: PlayersApi = PlayersApi()) : PlayerDetailsContract.Business.GetPlayerDetails {
 
     override fun fetchPlayerWithId(playerId: String, callback: DatabaseCallback<PlayerDetails>) {
         val apiCallback = object : PlayersCallback<DatabasePlayer> {

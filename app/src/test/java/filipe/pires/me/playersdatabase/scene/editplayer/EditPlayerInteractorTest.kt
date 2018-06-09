@@ -6,13 +6,12 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import filipe.pires.me.playersdatabase.entity.PlayerDetails
 import filipe.pires.me.playersdatabase.io.DatabaseCallback
-import filipe.pires.me.playersdatabase.io.EditPlayerWorker
 import org.junit.Test
 
 class EditPlayerInteractorTest {
 
     private val presenter = mock<EditPlayerContract.Presentation>()
-    private val editPlayerWorker = mock<EditPlayerWorker>()
+    private val editPlayerWorker = mock<EditPlayerContract.Business.DataManager>()
     private val router = mock<EditPlayerContract.Routes>()
     private val interactor = EditPlayerInteractor(presenter, editPlayerWorker, router)
 

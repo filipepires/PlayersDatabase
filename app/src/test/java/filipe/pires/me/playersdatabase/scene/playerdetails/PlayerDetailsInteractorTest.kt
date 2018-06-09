@@ -12,9 +12,10 @@ import org.junit.Test
 class PlayerDetailsInteractorTest {
 
     private val presenter = mock<PlayerDetailsContract.Presentation>()
-    private val playerDetailsWorker = mock<PlayerDetailsContract.Business.DataManager>()
+    private val playerDetailsWorker = mock<PlayerDetailsContract.Business.GetPlayerDetails>()
     private val router = mock<PlayerDetailsContract.Routes>()
-    private val interactor = PlayerDetailsInteractor(presenter, playerDetailsWorker, router)
+    private val deletePlayerWorker = mock<PlayerDetailsContract.Business.RemovePlayer>()
+    private val interactor = PlayerDetailsInteractor(presenter, playerDetailsWorker, router, deletePlayerWorker)
 
     @Test
     fun `when entering player details, fetch player details`() {
@@ -32,5 +33,21 @@ class PlayerDetailsInteractorTest {
         interactor.playerDetails = mock()
         interactor.onOptionsItemSelected(R.id.menu_edit, "some id")
         verify(router).routeToEditPlayer(interactor.playerDetails)
+    }
+
+    @Test
+    fun `when user selects delete option, show confirmation dialog`() {
+        interactor.onOptionsItemSelected(R.id.menu_delete, "some id")
+        verify(presenter).presentConfirmationDialog("some id")
+    }
+
+    @Test
+    fun `when player is deleted, route to main`() {
+        whenever(deletePlayerWorker.deletePlayer(any(), any())).thenAnswer {
+            val playersCallback = it.arguments[1] as DatabaseCallback<Any>
+            playersCallback.onSuccess(mock())
+        }
+        interactor.onConfirmation("some id")
+        verify(router).routeToMain()
     }
 }

@@ -15,18 +15,24 @@ class PlayerDetailsPresenterTest {
     private val presenter = PlayerDetailsPresenter(view, stringProvider)
 
     @Test
-    fun `when player details contains description, display description`(){
-        presenter.presentPlayerDetails(PlayerDetails("id","name","description"))
+    fun `when player details contains description, display description`() {
+        presenter.presentPlayerDetails(PlayerDetails("id", "name", "description"))
         verify(view).displayName("name")
         verify(view).displayDescription("description")
     }
 
     @Test
-    fun `when player details doesn't contain description, display default description`(){
+    fun `when player details doesn't contain description, display default description`() {
         doReturn("default description").`when`(stringProvider).getString(any())
-        presenter.presentPlayerDetails(PlayerDetails("id","name",""))
+        presenter.presentPlayerDetails(PlayerDetails("id", "name", ""))
         verify(view).displayName("name")
         verify(view).displayDescription("default description")
+    }
+
+    @Test
+    fun `when delete player clicked, display confirmation dialog`() {
+        presenter.presentConfirmationDialog("some id")
+        verify(view).displayConfirmationDialog("some id")
     }
 
 }

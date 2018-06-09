@@ -1,10 +1,12 @@
 package filipe.pires.me.playersdatabase.scene.playerdetails
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import filipe.pires.me.playersdatabase.R
+import filipe.pires.me.playersdatabase.io.DeletePlayerWorker
 import filipe.pires.me.playersdatabase.io.PlayerDetailsWorker
 import filipe.pires.me.playersdatabase.utils.DefaultStringProvider
 import kotlinx.android.synthetic.main.activity_player_details.*
@@ -20,7 +22,8 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
         PlayerDetailsInteractor(
                 PlayerDetailsPresenter(this, DefaultStringProvider(applicationContext)),
                 PlayerDetailsWorker(),
-                PlayerDetailsRouter(applicationContext)
+                PlayerDetailsRouter(applicationContext),
+                DeletePlayerWorker()
         )
     }
 
@@ -46,5 +49,18 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         interactor.onOptionsItemSelected(item.itemId, intent.getStringExtra(EXTRA_ID))
         return super.onOptionsItemSelected(item);
+    }
+
+    override fun displayConfirmationDialog(playerId: String) {
+        AlertDialog.Builder(this)
+                .setTitle(getString(R.string.delete_player_title))
+                .setMessage(getString(R.string.delete_player_message))
+                .setPositiveButton(android.R.string.yes) { _, _ ->
+                    interactor.onConfirmation(playerId)
+                }
+                .setNegativeButton(android.R.string.no) { dialog, _ ->
+                    dialog.cancel()
+                }
+                .show()
     }
 }

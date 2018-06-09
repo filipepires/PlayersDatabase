@@ -16,4 +16,8 @@ class PlayerDetailsPresenter(
         else
             view.displayDescription(playerDetails.description)
     }
+
+    override fun presentConfirmationDialog(playerId: String) {
+        view.displayConfirmationDialog(playerId)
+    }
 }
