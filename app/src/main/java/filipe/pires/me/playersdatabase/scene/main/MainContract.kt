@@ -14,6 +14,7 @@ interface MainContract {
     interface Business {
         fun onResume()
         fun onPlayerClicked(id: String)
+        fun onAddClicked()
 
         interface DataManager {
             fun fetchPlayers(callback: DatabaseCallback<List<Player>>)
@@ -27,5 +28,6 @@ interface MainContract {
 
     interface Routes{
         fun routeToPlayerDetailsWith(id: String)
+        fun routeToCreatePlayer()
     }
 }

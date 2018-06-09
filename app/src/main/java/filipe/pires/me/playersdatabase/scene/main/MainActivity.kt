@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        add.setOnClickListener{ interactor.onAddClicked()}
     }
 
     override fun onResume() {

@@ -6,7 +6,7 @@ import filipe.pires.me.playersdatabase.io.DatabaseCallback
 class MainInteractor(
         private val presenter: MainContract.Presentation,
         private val playerWorker: MainContract.Business.DataManager,
-        private val router : MainContract.Routes
+        private val router: MainContract.Routes
 ) : MainContract.Business {
 
     override fun onResume() {
@@ -24,5 +24,9 @@ class MainInteractor(
 
     override fun onPlayerClicked(id: String) {
         router.routeToPlayerDetailsWith(id)
+    }
+
+    override fun onAddClicked() {
+        router.routeToCreatePlayer()
     }
 }
