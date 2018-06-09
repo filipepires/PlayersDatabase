@@ -56,13 +56,13 @@ class PlayersApi {
 
     fun getPlayer(id: String, callback: PlayersCallback<DatabasePlayer>) {
         val call = playersService.getPlayer(id)
-        call.enqueue(object : Callback<List<DataTransferPlayer>> {
-            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
+        call.enqueue(object : Callback<DataTransferPlayer> {
+            override fun onFailure(call: Call<DataTransferPlayer>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
-                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
+            override fun onResponse(call: Call<DataTransferPlayer>, response: Response<DataTransferPlayer>) {
+                response.body()?.let { extractPlayer(it, callback) } ?: callback.onFailure()
             }
 
         })
@@ -103,15 +103,18 @@ class PlayersApi {
         return dataTransferPlayer
     }
 
-    fun addPlayer(player: DatabasePlayer, callback: PlayersCallback<DatabasePlayer>) {
-        val call = playersService.addPlayer(toDataTransferObject(player))
-        call.enqueue(object : Callback<List<DataTransferPlayer>> {
-            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
+    fun addPlayer(player: PlayerInformation, callback: PlayersCallback<Any>) {
+        val databasePlayer = DataTransferPlayer()
+        databasePlayer.playerName = player.playerName
+        databasePlayer.playerDescription = player.playerDescription
+        val call = playersService.addPlayer(databasePlayer)
+        call.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
-                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                callback.onSuccess(Any())
             }
 
         })
