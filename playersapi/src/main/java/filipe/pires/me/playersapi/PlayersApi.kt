@@ -1,6 +1,8 @@
 package filipe.pires.me.playersapi
 
 import android.support.annotation.VisibleForTesting
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,8 +17,16 @@ class PlayersApi {
     }
 
     private val restClient: Retrofit by lazy {
-        Retrofit.Builder()
+        initRestClient()
+    }
+
+    private fun initRestClient(): Retrofit {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder().addInterceptor(interceptor).build();
+        return Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }
@@ -71,15 +81,15 @@ class PlayersApi {
         return DatabasePlayer(player.id!!, player.playerName!!, player.playerDescription ?: "")
     }
 
-    fun updatePlayer(id: String, player: DatabasePlayer, callback: PlayersCallback<DatabasePlayer>) {
+    fun updatePlayer(id: String, player: DatabasePlayer, callback: PlayersCallback<Any>) {
         val call = playersService.updatePlayer(id, toDataTransferObject(player))
-        call.enqueue(object : Callback<List<DataTransferPlayer>> {
-            override fun onFailure(call: Call<List<DataTransferPlayer>>, t: Throwable?) {
+        call.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable?) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<List<DataTransferPlayer>>, response: Response<List<DataTransferPlayer>>) {
-                response.body()?.let { extractPlayer(it.first(), callback) } ?: callback.onFailure()
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                callback.onSuccess(Any())
             }
 
         })

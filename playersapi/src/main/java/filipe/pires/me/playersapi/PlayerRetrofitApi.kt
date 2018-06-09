@@ -13,7 +13,7 @@ internal interface PlayerRetrofitApi {
     fun getPlayer(@Path("id") id: String): Call<List<DataTransferPlayer>>
 
     @PUT("player/{id}")
-    fun updatePlayer(@Path("id") id: String, @Body player: DataTransferPlayer): Call<List<DataTransferPlayer>>
+    fun updatePlayer(@Path("id") id: String, @Body playerName: DataTransferPlayer): Call<Void>
 
     @POST("player")
     fun addPlayer(@Body player: DataTransferPlayer): Call<List<DataTransferPlayer>>
