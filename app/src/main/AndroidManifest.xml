@@ -19,5 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name="filipe.pires.me.playersdatabase.scene.playerdetails.PlayerDetailsActivity" />
+        <activity android:name=".scene.editplayer.EditPlayerActivity" />
     </application>
 </manifest>

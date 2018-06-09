@@ -2,6 +2,8 @@ package filipe.pires.me.playersdatabase.scene.playerdetails
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.io.PlayerDetailsWorker
 import filipe.pires.me.playersdatabase.utils.DefaultStringProvider
@@ -17,7 +19,8 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
     private val interactor: PlayerDetailsContract.Business by lazy {
         PlayerDetailsInteractor(
                 PlayerDetailsPresenter(this, DefaultStringProvider(applicationContext)),
-                PlayerDetailsWorker()
+                PlayerDetailsWorker(),
+                PlayerDetailsRouter(applicationContext)
         )
     }
 
@@ -33,5 +36,15 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
 
     override fun displayDescription(description: String) {
         this.description.text = description
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.player_options, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        interactor.onOptionsItemSelected(item.itemId, intent.getStringExtra(EXTRA_ID))
+        return super.onOptionsItemSelected(item);
     }
 }

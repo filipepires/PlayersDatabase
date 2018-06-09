@@ -4,4 +4,6 @@
     <string name="default_description">N/A</string>
     <string name="name">Name</string>
     <string name="about_this_player">About this Player:</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
 </resources>

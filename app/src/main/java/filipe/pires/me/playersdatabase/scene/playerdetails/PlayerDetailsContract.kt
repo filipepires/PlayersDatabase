@@ -12,6 +12,7 @@ interface PlayerDetailsContract {
 
     interface Business {
         fun onCreate(playerId: String)
+        fun onOptionsItemSelected(itemId: Int, playerId: String)
 
         interface DataManager {
             fun fetchPlayerWithId(playerId: String, callback: DatabaseCallback<PlayerDetails>)
@@ -20,5 +21,9 @@ interface PlayerDetailsContract {
 
     interface Presentation {
         fun presentPlayerDetails(playerDetails: PlayerDetails)
+    }
+
+    interface Routes {
+        fun routeToEditPlayer(playerDetails: PlayerDetails)
     }
 }
