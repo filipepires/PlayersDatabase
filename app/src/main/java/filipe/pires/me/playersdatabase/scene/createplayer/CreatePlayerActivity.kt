@@ -14,7 +14,7 @@ class CreatePlayerActivity : AppCompatActivity(), CreatePlayerContract.View {
         CreatePlayerInteractor(
                 CreatePlayerPresenter(this),
                 CreatePlayerWorker(),
-                CreatePlayerRouter(applicationContext)
+                CreatePlayerRouter(this)
         )
     }
 

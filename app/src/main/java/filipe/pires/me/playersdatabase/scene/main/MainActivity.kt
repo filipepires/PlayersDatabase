@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         MainInteractor(
                 MainPresenter(this),
                 PlayersWorker(),
-                MainRouter(applicationContext)
+                MainRouter(this)
         )
     }
 

@@ -18,7 +18,7 @@ class EditPlayerActivity : AppCompatActivity(), EditPlayerContract.View {
         EditPlayerInteractor(
                 EditPlayerPresenter(this),
                 EditPlayerWorker(),
-                EditPlayerRouter(applicationContext)
+                EditPlayerRouter(this)
         )
     }
 

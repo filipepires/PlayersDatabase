@@ -23,7 +23,7 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
         PlayerDetailsInteractor(
                 PlayerDetailsPresenter(this, DefaultStringProvider(applicationContext)),
                 PlayerDetailsWorker(),
-                PlayerDetailsRouter(applicationContext),
+                PlayerDetailsRouter(this),
                 DeletePlayerWorker()
         )
     }
