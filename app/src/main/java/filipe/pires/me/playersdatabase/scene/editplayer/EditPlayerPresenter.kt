@@ -7,4 +7,8 @@ class EditPlayerPresenter(private val view: EditPlayerContract.View) : EditPlaye
     override fun presentReceivedPlayer(playerDetails: PlayerDetails) {
         view.displayReceivedPlayer(playerDetails)
     }
+
+    override fun presenterMandatoryNameError() {
+        view.displayMandatoryNameError()
+    }
 }

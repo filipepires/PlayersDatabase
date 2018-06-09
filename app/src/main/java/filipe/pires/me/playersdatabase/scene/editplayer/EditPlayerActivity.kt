@@ -2,8 +2,10 @@ package filipe.pires.me.playersdatabase.scene.editplayer
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.entity.PlayerDetails
+import filipe.pires.me.playersdatabase.io.EditPlayerWorker
 import kotlinx.android.synthetic.main.activity_edit_player.*
 
 class EditPlayerActivity : AppCompatActivity(), EditPlayerContract.View {
@@ -12,20 +14,29 @@ class EditPlayerActivity : AppCompatActivity(), EditPlayerContract.View {
         const val EXTRA_PLAYER_DETAILS = "extra.player_details"
     }
 
-    private val editPlayerInteractor: EditPlayerContract.Business by lazy {
+    private val interactor: EditPlayerContract.Business by lazy {
         EditPlayerInteractor(
-                EditPlayerPresenter(this)
+                EditPlayerPresenter(this),
+                EditPlayerWorker(),
+                EditPlayerRouter(applicationContext)
         )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_player)
-        editPlayerInteractor.onCreate(intent.getParcelableExtra<PlayerDetails>(EXTRA_PLAYER_DETAILS))
+        interactor.onCreate(getPlayer())
+        save.setOnClickListener { interactor.onSaveClicked(getPlayer().id, name.text.toString(), description.text.toString()) }
     }
+
+    private fun getPlayer(): PlayerDetails = intent.getParcelableExtra(EXTRA_PLAYER_DETAILS)
 
     override fun displayReceivedPlayer(playerDetails: PlayerDetails) {
         name.setText(playerDetails.name)
         description.setText(playerDetails.description)
+    }
+
+    override fun displayMandatoryNameError() {
+        Toast.makeText(applicationContext, getString(R.string.mandatory_error_message), Toast.LENGTH_SHORT).show()
     }
 }

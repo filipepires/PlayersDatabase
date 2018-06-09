@@ -9,4 +9,5 @@
     <string name="save">Save</string>
     <string name="player_name">Player name</string>
     <string name="player_description">The player description</string>
+    <string name="mandatory_error_message">Name is mandatory</string>
 </resources>
