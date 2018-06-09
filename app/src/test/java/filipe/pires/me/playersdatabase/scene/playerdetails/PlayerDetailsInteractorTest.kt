@@ -29,6 +29,16 @@ class PlayerDetailsInteractorTest {
     }
 
     @Test
+    fun `when player details fails, present general error`() {
+        whenever(playerDetailsWorker.fetchPlayerWithId(any(), any())).thenAnswer {
+            val playersCallback = it.arguments[1] as DatabaseCallback<PlayerDetails>
+            playersCallback.onFailure()
+        }
+        interactor.onCreate("some id")
+        verify(presenter).presentGeneralError()
+    }
+
+    @Test
     fun `when user selects edit option, move to edit with player details`() {
         interactor.playerDetails = mock()
         interactor.onOptionsItemSelected(R.id.menu_edit, "some id")
@@ -49,5 +59,15 @@ class PlayerDetailsInteractorTest {
         }
         interactor.onConfirmation("some id")
         verify(router).routeToMain()
+    }
+
+    @Test
+    fun `when player cannot be deleted, present general error`() {
+        whenever(deletePlayerWorker.deletePlayer(any(), any())).thenAnswer {
+            val playersCallback = it.arguments[1] as DatabaseCallback<Any>
+            playersCallback.onFailure()
+        }
+        interactor.onConfirmation("some id")
+        verify(presenter).presentGeneralError()
     }
 }

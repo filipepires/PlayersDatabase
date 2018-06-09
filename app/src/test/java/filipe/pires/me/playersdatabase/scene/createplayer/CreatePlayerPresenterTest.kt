@@ -14,4 +14,10 @@ class CreatePlayerPresenterTest {
         presenter.presenterMandatoryNameError()
         verify(view).displayMandatoryNameError()
     }
+
+    @Test
+    fun `when an error occur, show error message`() {
+        presenter.presentGeneralError()
+        verify(view).displayGeneralError()
+    }
 }

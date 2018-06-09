@@ -23,7 +23,7 @@ class PlayerDetailsInteractor(
             }
 
             override fun onFailure() {
-
+                presenter.presentGeneralError()
             }
         }
         playerDetailsWorker.fetchPlayerWithId(playerId, callback)
@@ -43,7 +43,7 @@ class PlayerDetailsInteractor(
             }
 
             override fun onFailure() {
-
+                presenter.presentGeneralError()
             }
         }
         deletePlayerWorker.deletePlayer(playerId, callback)

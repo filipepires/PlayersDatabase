@@ -8,6 +8,7 @@ interface PlayerDetailsContract {
         fun displayName(name: String)
         fun displayDescription(description: String)
         fun displayConfirmationDialog(playerId: String)
+        fun displayGeneralError()
     }
 
     interface Business {
@@ -27,6 +28,7 @@ interface PlayerDetailsContract {
     interface Presentation {
         fun presentPlayerDetails(playerDetails: PlayerDetails)
         fun presentConfirmationDialog(playerId: String)
+        fun presentGeneralError()
     }
 
     interface Routes {

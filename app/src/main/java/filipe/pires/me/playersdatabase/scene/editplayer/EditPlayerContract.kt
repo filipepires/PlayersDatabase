@@ -8,6 +8,7 @@ interface EditPlayerContract {
     interface View {
         fun displayReceivedPlayer(playerDetails: PlayerDetails)
         fun displayMandatoryNameError()
+        fun displayGeneralError()
 
     }
 
@@ -22,6 +23,7 @@ interface EditPlayerContract {
     interface Presentation {
         fun presentReceivedPlayer(playerDetails: PlayerDetails)
         fun presenterMandatoryNameError()
+        fun presentGeneralError()
     }
 
     interface Routes {

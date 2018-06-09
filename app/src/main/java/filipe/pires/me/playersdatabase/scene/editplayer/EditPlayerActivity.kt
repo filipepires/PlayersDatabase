@@ -39,4 +39,8 @@ class EditPlayerActivity : AppCompatActivity(), EditPlayerContract.View {
     override fun displayMandatoryNameError() {
         Toast.makeText(applicationContext, getString(R.string.mandatory_error_message), Toast.LENGTH_SHORT).show()
     }
+
+    override fun displayGeneralError() {
+        Toast.makeText(applicationContext, getString(R.string.general_error_message), Toast.LENGTH_SHORT).show()
+    }
 }

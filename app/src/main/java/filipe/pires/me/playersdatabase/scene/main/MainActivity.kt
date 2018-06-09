@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.entity.Player
 import filipe.pires.me.playersdatabase.io.PlayersWorker
@@ -17,16 +18,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
-    private val interactor: MainContract.Business by lazy { MainInteractor(
-            MainPresenter(this),
-            PlayersWorker(),
-            MainRouter(applicationContext)
-    ) }
+    private val interactor: MainContract.Business by lazy {
+        MainInteractor(
+                MainPresenter(this),
+                PlayersWorker(),
+                MainRouter(applicationContext)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        add.setOnClickListener{ interactor.onAddClicked()}
+        add.setOnClickListener { interactor.onAddClicked() }
     }
 
     override fun onResume() {
@@ -56,5 +59,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                     })
         }
         player_list.adapter = PlayersAdapter(players.map { it.name }, onItemClickListeners)
+    }
+
+    override fun displayGeneralError() {
+        Toast.makeText(applicationContext, getString(R.string.general_error_message), Toast.LENGTH_SHORT).show()
     }
 }

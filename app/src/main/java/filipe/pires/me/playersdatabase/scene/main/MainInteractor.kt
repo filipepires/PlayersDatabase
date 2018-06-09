@@ -16,7 +16,7 @@ class MainInteractor(
             }
 
             override fun onFailure() {
-
+                presenter.presentGeneralError()
             }
         }
         playerWorker.fetchPlayers(callback)

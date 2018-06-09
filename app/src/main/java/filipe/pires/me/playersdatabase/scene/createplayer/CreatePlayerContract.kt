@@ -7,6 +7,7 @@ interface CreatePlayerContract {
 
     interface View {
         fun displayMandatoryNameError()
+        fun displayGeneralError()
     }
 
     interface Business {
@@ -19,6 +20,7 @@ interface CreatePlayerContract {
 
     interface Presentation {
         fun presenterMandatoryNameError()
+        fun presentGeneralError()
     }
 
     interface Routes {

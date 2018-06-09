@@ -29,4 +29,14 @@ class CreatePlayerInteractorTest {
         interactor.onSaveClicked("some name", "some description")
         verify(router).routeToMain()
     }
+
+    @Test
+    fun `when save fails, present general message`() {
+        whenever(createPlayerWorker.createPlayer(any(), any(), any())).thenAnswer {
+            val playersCallback = it.arguments[2] as DatabaseCallback<Any>
+            playersCallback.onFailure()
+        }
+        interactor.onSaveClicked("some name", "some description")
+        verify(presenter).presentGeneralError()
+    }
 }

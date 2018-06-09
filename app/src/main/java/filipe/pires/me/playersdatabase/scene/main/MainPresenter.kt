@@ -10,4 +10,8 @@ class MainPresenter(private val view: MainContract.View) : MainContract.Presenta
         else
             view.displayPlayers(players)
     }
+
+    override fun presentGeneralError() {
+        view.displayGeneralError()
+    }
 }

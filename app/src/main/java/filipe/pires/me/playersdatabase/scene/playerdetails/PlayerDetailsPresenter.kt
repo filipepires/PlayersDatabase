@@ -20,4 +20,8 @@ class PlayerDetailsPresenter(
     override fun presentConfirmationDialog(playerId: String) {
         view.displayConfirmationDialog(playerId)
     }
+
+    override fun presentGeneralError() {
+        view.displayGeneralError()
+    }
 }

@@ -11,4 +11,8 @@ class EditPlayerPresenter(private val view: EditPlayerContract.View) : EditPlaye
     override fun presenterMandatoryNameError() {
         view.displayMandatoryNameError()
     }
+
+    override fun presentGeneralError() {
+        view.displayGeneralError()
+    }
 }

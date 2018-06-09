@@ -23,6 +23,7 @@ class EditPlayerInteractor(
                 }
 
                 override fun onFailure() {
+                    presenter.presentGeneralError()
                 }
 
             }

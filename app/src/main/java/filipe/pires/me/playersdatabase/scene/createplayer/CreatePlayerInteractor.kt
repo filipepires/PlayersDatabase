@@ -19,6 +19,7 @@ class CreatePlayerInteractor(
                 }
 
                 override fun onFailure() {
+                    presenter.presentGeneralError()
                 }
 
             }

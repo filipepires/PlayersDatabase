@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import filipe.pires.me.playersdatabase.R
 import filipe.pires.me.playersdatabase.io.DeletePlayerWorker
 import filipe.pires.me.playersdatabase.io.PlayerDetailsWorker
@@ -62,5 +63,9 @@ class PlayerDetailsActivity : AppCompatActivity(), PlayerDetailsContract.View {
                     dialog.cancel()
                 }
                 .show()
+    }
+
+    override fun displayGeneralError() {
+        Toast.makeText(applicationContext, getString(R.string.general_error_message), Toast.LENGTH_SHORT).show()
     }
 }

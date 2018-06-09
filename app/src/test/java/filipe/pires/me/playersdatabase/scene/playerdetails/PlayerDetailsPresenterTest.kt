@@ -35,4 +35,9 @@ class PlayerDetailsPresenterTest {
         verify(view).displayConfirmationDialog("some id")
     }
 
+    @Test
+    fun `when an error occur, show error message`() {
+        presenter.presentGeneralError()
+        verify(view).displayGeneralError()
+    }
 }

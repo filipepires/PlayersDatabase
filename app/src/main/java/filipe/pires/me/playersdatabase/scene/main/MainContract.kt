@@ -8,6 +8,7 @@ interface MainContract {
     interface View {
         fun displayEmptyListMessage()
         fun displayPlayers(players: List<Player>)
+        fun displayGeneralError()
 
     }
 
@@ -23,6 +24,7 @@ interface MainContract {
 
     interface Presentation {
         fun presentPlayers(players: List<Player>)
+        fun presentGeneralError()
 
     }
 

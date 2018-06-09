@@ -33,4 +33,14 @@ class MainInteractorTest {
         interactor.onPlayerClicked("some id")
         verify(router).routeToPlayerDetailsWith("some id")
     }
+
+    @Test
+    fun `when players cannot be fetch, present general error`() {
+        whenever(playerWorker.fetchPlayers(any())).thenAnswer {
+            val playersCallback = it.arguments[0] as DatabaseCallback<List<Player>>
+            playersCallback.onFailure()
+        }
+        interactor.onResume()
+        verify(presenter).presentGeneralError()
+    }
 }

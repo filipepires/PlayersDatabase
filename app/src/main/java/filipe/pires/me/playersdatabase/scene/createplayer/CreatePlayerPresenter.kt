@@ -6,4 +6,8 @@ class CreatePlayerPresenter(private val view: CreatePlayerContract.View) : Creat
     override fun presenterMandatoryNameError() {
         view.displayMandatoryNameError()
     }
+
+    override fun presentGeneralError() {
+        view.displayGeneralError()
+    }
 }

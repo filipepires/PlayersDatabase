@@ -12,4 +12,5 @@
     <string name="mandatory_error_message">Name is mandatory</string>
     <string name="delete_player_title">Delete player</string>
     <string name="delete_player_message">Are you sure you want to delete this player?</string>
+    <string name="general_error_message">Ops, something when wrong!</string>
 </resources>
